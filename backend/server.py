@@ -393,6 +393,8 @@ async def get_project_tasks(project_id: str, current_user: dict = Depends(get_cu
     tasks = list(tasks_collection.find({"project_id": project_id}))
     for task in tasks:
         task.pop("_id", None)
+        if "created_at" in task:
+            task["created_at"] = task["created_at"].isoformat()
     
     return {"tasks": tasks}
 
