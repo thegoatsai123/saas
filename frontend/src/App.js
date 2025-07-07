@@ -901,9 +901,9 @@ const App = () => {
   );
 };
 
-// Additional components that will be created separately
-const ProjectsPage = () => <div>Projects Page - Coming soon</div>;
-const ProjectDetail = () => <div>Project Detail - Coming soon</div>;
-const CreateProject = () => <div>Create Project - Coming soon</div>;
+// Import additional components
+import ProjectsPage from './components/ProjectsPage';
+import ProjectDetail from './components/ProjectDetail';
+import CreateProject from './components/CreateProject';
 
 export default App;
