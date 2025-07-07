@@ -373,8 +373,12 @@ async def get_project(project_id: str, current_user: dict = Depends(get_current_
     tasks = list(tasks_collection.find({"project_id": project_id}))
     for task in tasks:
         task.pop("_id", None)
+        if "created_at" in task:
+            task["created_at"] = task["created_at"].isoformat()
     
     project.pop("_id", None)
+    if "created_at" in project:
+        project["created_at"] = project["created_at"].isoformat()
     project["tasks"] = tasks
     
     return {"project": project}
