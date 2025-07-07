@@ -418,6 +418,8 @@ async def create_task(project_id: str, task: TaskCreate, current_user: dict = De
     
     tasks_collection.insert_one(task_doc)
     task_doc.pop("_id", None)
+    if "created_at" in task_doc:
+        task_doc["created_at"] = task_doc["created_at"].isoformat()
     
     return {"task": task_doc}
 
