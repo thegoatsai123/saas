@@ -443,6 +443,8 @@ async def update_task(task_id: str, task_update: TaskUpdate, current_user: dict 
     # Get updated task
     updated_task = tasks_collection.find_one({"id": task_id})
     updated_task.pop("_id", None)
+    if "created_at" in updated_task:
+        updated_task["created_at"] = updated_task["created_at"].isoformat()
     
     return {"task": updated_task}
 
