@@ -330,7 +330,16 @@ async def create_project(project: ProjectCreate, current_user: dict = Depends(ge
         tasks_collection.insert_one(task_doc)
     
     return {
-        "project": project_doc,
+        "project": {
+            "id": project_doc["id"],
+            "user_id": project_doc["user_id"],
+            "title": project_doc["title"],
+            "description": project_doc["description"],
+            "validation_scores": project_doc["validation_scores"],
+            "features": project_doc["features"],
+            "status": project_doc["status"],
+            "created_at": project_doc["created_at"].isoformat()
+        },
         "analysis": analysis,
         "tasks_created": len(tasks)
     }
