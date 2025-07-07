@@ -356,8 +356,10 @@ async def get_user_projects(current_user: dict = Depends(get_current_user)):
         project["completed_tasks"] = completed_tasks
         project["progress"] = (completed_tasks / task_count * 100) if task_count > 0 else 0
         
-        # Remove MongoDB _id field
+        # Remove MongoDB _id field and convert datetime
         project.pop("_id", None)
+        if "created_at" in project:
+            project["created_at"] = project["created_at"].isoformat()
     
     return {"projects": projects}
 
